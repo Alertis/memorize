@@ -5,6 +5,7 @@ INJECTED from /media/alertis/Yeni Birim/Projeler/Linux/memorize/android/app/src/
 INJECTED from /media/alertis/Yeni Birim/Projeler/Linux/memorize/android/app/src/main/AndroidManifest.xml:1:1-26:12
 INJECTED from /media/alertis/Yeni Birim/Projeler/Linux/memorize/android/app/src/main/AndroidManifest.xml:1:1-26:12
 MERGED from /media/alertis/Yeni Birim/Projeler/Linux/memorize/android/app/src/main/AndroidManifest.xml:1:1-26:12
+MERGED from [:react-native-sqlite-storage] /media/alertis/Yeni Birim/Projeler/Linux/memorize/node_modules/react-native-sqlite-storage/src/android/build/intermediates/lıbrary_manıfest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.59.2] /home/alertis/.gradle/caches/transforms-1/files-1.1/react-native-0.59.2.aar/8235e82a6487b5e1f5cb88e103f08574/AndroidManifest.xml:2:1-13:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] /home/alertis/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/f930ec5d97d323a38940122cba32ac12/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:28.0.0] /home/alertis/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/61bcc66bedd2f52b635cc0bfab1b1a93/AndroidManifest.xml:17:1-22:12
@@ -129,6 +130,8 @@ uses-sdk
 INJECTED from /media/alertis/Yeni Birim/Projeler/Linux/memorize/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /media/alertis/Yeni Birim/Projeler/Linux/memorize/android/app/src/main/AndroidManifest.xml
 INJECTED from /media/alertis/Yeni Birim/Projeler/Linux/memorize/android/app/src/main/AndroidManifest.xml
+MERGED from [:react-native-sqlite-storage] /media/alertis/Yeni Birim/Projeler/Linux/memorize/node_modules/react-native-sqlite-storage/src/android/build/intermediates/lıbrary_manıfest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-sqlite-storage] /media/alertis/Yeni Birim/Projeler/Linux/memorize/node_modules/react-native-sqlite-storage/src/android/build/intermediates/lıbrary_manıfest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.59.2] /home/alertis/.gradle/caches/transforms-1/files-1.1/react-native-0.59.2.aar/8235e82a6487b5e1f5cb88e103f08574/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.59.2] /home/alertis/.gradle/caches/transforms-1/files-1.1/react-native-0.59.2.aar/8235e82a6487b5e1f5cb88e103f08574/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:28.0.0] /home/alertis/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/f930ec5d97d323a38940122cba32ac12/AndroidManifest.xml:20:5-44

@@ -7,23 +7,32 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
+import { openDatabase,deleteDatabase } from 'react-native-sqlite-storage';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+const db=openDatabase({name : 'memorize.db'});
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component{
+  
+  constructor(props){
+    super(props);
+    this.state = {
+      records: []
+    }
+  }
+  componentWillMount(){
+    db.transaction((tx) => {
+      tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='words'", [], (tx, results) => {
+        console.log('item:', results.rows.length);
+        console.log("Query completed");
+      })
+    })
+   
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <Text>ad</Text>
       </View>
     );
   }
