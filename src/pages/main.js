@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {  Container, Header, Content, Footer, FooterTab, Button, Text, Badge, Left, Body, Title, Right } from 'native-base';
-import  Icon  from 'react-native-vector-icons'
+import {  Icon, Container, Header, Content, Footer, FooterTab, Button, Text, Badge, Left, Body, Title, Right } from 'native-base';
+
 
 export default class Main extends Component {
 
