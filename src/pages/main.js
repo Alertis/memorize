@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {  Icon, Container, Header, Content, Footer, FooterTab, Button, Text, Badge, Left, Body, Title, Right } from 'native-base';
-
+import { Button, Icon, Container, Content, Footer, FooterTab, Text, Badge,  } from 'native-base';
+import HeaderComp from '../component/header';
 
 export default class Main extends Component {
 
@@ -16,17 +16,7 @@ export default class Main extends Component {
     render(){
         return(
             <Container>
-                <Header>
-                    <Left>
-                        <Button transparent>
-                            <Icon name='menu' />
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title>Header</Title>
-                    </Body>
-                    <Right />
-                </Header>
+                <HeaderComp icon="menu" title="Kelimeler" />
                 <Content />
                 <Footer>
                     <FooterTab>
