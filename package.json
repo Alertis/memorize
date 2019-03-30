@@ -8,9 +8,13 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "native-base": "^2.12.1",
     "react": "16.8.3",
     "react-native": "0.59.2",
+    "react-native-material-design": "^0.3.7",
+    "react-native-router-flux": "^4.0.6",
     "react-native-sqlite-storage": "^3.3.10",
+    "react-native-vector-icons": "^6.4.2",
     "websqlite": "^1.0.7"
   },
   "devDependencies": {
