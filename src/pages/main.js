@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import { Button, Icon, Container, Content, Footer, FooterTab, Text, Badge,  } from 'native-base';
+import { Container } from 'native-base';
 import HeaderComp from '../component/header';
 import FooterMenu from '../component/footerMenu';
+import Words from '../component/words';
 
 export default class Main extends Component {
 
@@ -18,7 +19,7 @@ export default class Main extends Component {
         return(
             <Container>
                 <HeaderComp icon="menu" title="Kelimeler" />
-                <Content />
+                <Words />
                 <FooterMenu />
             </Container>
         );
