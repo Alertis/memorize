@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import {Text} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Content, List, ListItem, Left, Right, Icon, Item, Input, Header, Body, Button, Switch  } from 'native-base';
+import Data from '../DBHelper/data';
+
+let service = new Data()
+
 
 export default class Words extends Component {
     editWord = (item) => {
@@ -15,6 +19,9 @@ export default class Words extends Component {
             }
             
         })
+    }
+    deleteWord = (item) => {
+       service.deleteWord(item.id);
     }
     render(){
         console.log(this.props.data)
@@ -36,6 +43,9 @@ export default class Words extends Component {
                                         <Text style={{ fontWeight: "600" }}>{item.enMean} - {item.trMean}</Text>
                                         <Text note numberOfLines={1}>{item.structor} - {item.sentence} </Text>
                                     </Body>
+                                    <Button iconLeft transparent primary>
+                                        <Icon type="FontAwesome5" name='trash' onPress={ () => ( this.deleteWord(item) ) } />
+                                    </Button>
                                     <Button iconLeft transparent primary>
                                         <Icon type="FontAwesome5" name='edit' onPress={ () => ( this.editWord(item) ) } />
                                     </Button>

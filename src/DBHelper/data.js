@@ -55,4 +55,22 @@ export default class Data {
             },(err) => console.log(err));
         })
     }
+
+    deleteWord(id){
+        db.transaction((tx) => {
+            tx.executeSql("DELETE FROM vocabulary WHERE id=?",
+            [id], (tx,res) => {
+                Actions.home();
+            },(err) => console.log(err));
+        })
+    }
+
+    updateTeachWord(id){
+        db.transaction((tx) => {
+            tx.executeSql("UPDATE vocabulary SET enMean=?, trMean=?, structor=?, sentence=? WHERE id=?",
+            [id], (tx,res) => {
+                Actions.home();
+            },(err) => console.log(err));
+        })
+    }
 }

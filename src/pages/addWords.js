@@ -8,8 +8,6 @@ import Data from '../DBHelper/data';
 
 let service = new Data()
 
-const db = openDatabase({name : 'memorize.db'});
-
 export default class addWords extends Component {
     constructor(props){
         super(props);
@@ -25,7 +23,6 @@ export default class addWords extends Component {
     }
 
     render(){
-        console.log(this.props)
         return(
             <Container>
                 <HeaderComp  title="Yeni Kelime Ekle" />
