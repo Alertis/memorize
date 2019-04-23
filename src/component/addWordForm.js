@@ -4,25 +4,26 @@ import { Content, Form, Label, Left, Right, Icon, Item, Input, Header, Body, But
 
 export default class WordForm extends Component {
     state = {
-        enWord : '',
-        trWord : '',
-        structor : '',
-        sentence : ''
+        enWord : this.props.words.enWord ? this.props.words.enWord : '',
+        trWord : this.props.words.trWord ? this.props.words.trWord : '',
+        structor : this.props.words.structor ? this.props.words.structor : '',
+        sentence : this.props.words.sentence ? this.props.words.sentence : '',
+        id : this.props.words.id ? this.props.words.id : null
     }
     saveClick = () =>{
         console.log(this.state);
         if(this.state.enWord == '' || this.state.trWord == '' || this.state.structor == '')
             Alert.alert('DİKKAT !','Lütfen formdaki boş alanları doldurunuz!')
-        else
-            this.props.saveClick(this.state.enWord, this.state.trWord, this.state.structor, this.state.sentence);
-    }
-
-    handleChange = (e) => {
-        console.log(e)
-        this.setState({ [e.target.name]:e.target.value });
+        else{
+            if(this.state.id == null)
+                this.props.saveClick(this.state.enWord, this.state.trWord, this.state.structor, this.state.sentence);
+            else
+                this.props.updateClick(this.state.id,this.state.enWord, this.state.trWord, this.state.structor, this.state.sentence)
+        }
     }
 
     render(){
+      
         return(
             <Content>
                <Form>

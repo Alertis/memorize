@@ -19,11 +19,17 @@ export default class addWords extends Component {
     save = (enMean, trMean, structor, sentence) => {
         service.addWord(enMean, trMean, structor, sentence);
     }
+
+    update = (id, enMean, trMean, structor, sentence) => {
+        service.updateWord(id, enMean, trMean, structor, sentence);
+    }
+
     render(){
+        console.log(this.props)
         return(
             <Container>
                 <HeaderComp  title="Yeni Kelime Ekle" />
-                <WordForm saveClick={this.save} />
+                <WordForm saveClick={this.save} updateClick={ this.update } words={this.props.words}/>
                 <FooterMenu />
             </Container>
         );

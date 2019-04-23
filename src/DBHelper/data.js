@@ -46,4 +46,13 @@ export default class Data {
             },(err) => console.log(err));
         })
     }
+
+    updateWord(id, enMean, trMean, structor, sentence){
+        db.transaction((tx) => {
+            tx.executeSql("UPDATE vocabulary SET enMean=?, trMean=?, structor=?, sentence=? WHERE id=?",
+            [enMean, trMean, structor, sentence, id], (tx,res) => {
+                Actions.home();
+            },(err) => console.log(err));
+        })
+    }
 }

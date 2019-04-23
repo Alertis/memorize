@@ -1,9 +1,21 @@
 import React, {Component} from 'react';
-import {Text} from 'react-native'
+import {Text} from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { Content, List, ListItem, Left, Right, Icon, Item, Input, Header, Body, Button, Switch  } from 'native-base';
 
 export default class Words extends Component {
-    
+    editWord = (item) => {
+        Actions.add({
+            words:{
+                id : item.id,
+                enWord : item.enMean,
+                trWord : item.trMean,
+                structor : item.structor,
+                sentence : item.sentence
+            }
+            
+        })
+    }
     render(){
         console.log(this.props.data)
         return(
@@ -11,7 +23,7 @@ export default class Words extends Component {
                <Header searchBar>
                     <Item>
                         <Icon name="ios-search" />
-                        <Input placeholder="Search" />
+                        <Input placeholder="Ara" />
                         <Icon name="ios-people" />
                     </Item>
                </Header>
@@ -25,8 +37,8 @@ export default class Words extends Component {
                                         <Text note numberOfLines={1}>{item.structor} - {item.sentence} </Text>
                                     </Body>
                                     <Button iconLeft transparent primary>
-                                            <Icon type="FontAwesome5" name='edit' />
-                                        </Button>
+                                        <Icon type="FontAwesome5" name='edit' onPress={ () => ( this.editWord(item) ) } />
+                                    </Button>
                                     <Switch value={item.teach==1 ? true : false } />
                                 </ListItem>
                         ))
