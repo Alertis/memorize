@@ -1,4 +1,5 @@
 import { openDatabase,deleteDatabase }from 'react-native-sqlite-storage';
+import { Actions } from 'react-native-router-flux';
 
 const db = openDatabase({name : 'memorize.db'});
 
@@ -37,52 +38,12 @@ export default class Data {
 
         })
     }
-
-     selectVocabulary = () => {
-        
-       console.log( db.transaction((tx) => {        
-            //return "asd";
-           return tx.executeSql("SELECT * FROM vocabulary", [], rowsData(tx,res),(err) => console.log(err));
-        }));
-
-        function rowsData(tx,res){
-            var data=[];
-            var len = res.rows.length;
-            for (let i = 0; i < len; i++) {
-                let row = res.rows.item(i);
-                data.push(row);
-            }
-            return data;
-        }
-        //console.log(data)
-        //return data;
+    addWord(enMean, trMean, structor, sentence){
+        db.transaction((tx) => {
+            tx.executeSql("INSERT INTO vocabulary (enMean, trMean, structor, sentence, teach, teachLevel) VALUES (?, ?, ?, ?, 0, 0)",
+            [enMean, trMean, structor, sentence], (tx,res) => {
+                Actions.home();
+            },(err) => console.log(err));
+        })
     }
 }
-
-
-/*
-
- selectVocabulary = () => {
-       
-        db.transaction((tx) => {
-            //return "asd";
-           tx.executeSql("SELECT * FROM vocabulary", [], (tx,res) => {
-                var data=[];
-                if(res.rows.length>0){
-                    for (let i = 0; i < res.rows.length; i++) {
-                        //console.log(res.rows.item(i))
-                        data.push(res.rows.item(i));
-                    }
-                }else{
-                    tx.executeSql("INSERT INTO vocabulary (trMean, enMean, structor, sentence, reminderDate, teachDate, teachLevel, teach)"+
-                    "VALUES ('elma', 'apple', 'isim', 'I want to eat apple pie.', '', '', 0, 0 )", [], 
-                    (tx,res) => console.log(res), 
-                    (err) => console.log(err) );
-                }
-            },(err) => console.log(err));
-        });
-        console.log(this.state.words)
-        //return data;
-    }
-    
-*/

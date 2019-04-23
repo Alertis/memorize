@@ -36,7 +36,7 @@ export default class Main extends Component {
     render(){
         return(
             <Container>
-                <HeaderComp icon="menu" title="Kelimeler" />
+                <HeaderComp icon="add" title="Kelimeler" />
                 <Words data={this.state.data}/>
                 <FooterMenu />
             </Container>

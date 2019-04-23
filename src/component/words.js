@@ -3,10 +3,6 @@ import {Text} from 'react-native'
 import { Content, List, ListItem, Left, Right, Icon, Item, Input, Header, Body, Button, Switch  } from 'native-base';
 
 export default class Words extends Component {
-
-        /*state = {
-            words : this.props.data ? this.props.data : "",
-}*/
     
     render(){
         console.log(this.props.data)
@@ -33,7 +29,8 @@ export default class Words extends Component {
                                         </Button>
                                     <Switch value={item.teach==1 ? true : false } />
                                 </ListItem>
-                        ))}
+                        ))
+                    }
                     
                 </List>
             </Content>
