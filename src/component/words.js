@@ -32,6 +32,7 @@ export default class Words extends Component {
         service.updateTeachWord(item.id,item.teach == 1 ? 0 : 1);
         this.props.refreshWords();
     }
+
     render(){
         console.log(this.props.data)
         return(
@@ -39,8 +40,8 @@ export default class Words extends Component {
                <Header searchBar>
                     <Item>
                         <Icon name="ios-search" />
-                        <Input placeholder="Ara" />
-                        <Icon name="ios-people" />
+                        <Input placeholder="Ara" onChangeText={val => (this.props.search(val))}/>
+                        <Icon type="FontAwesome5" name="language" />
                     </Item>
                </Header>
                <List>
