@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text} from 'react-native';
+import {Text, Alert} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Content, List, ListItem, Left, Right, Icon, Item, Input, Header, Body, Button, Switch  } from 'native-base';
 import Data from '../DBHelper/data';
@@ -21,7 +21,11 @@ export default class Words extends Component {
         })
     }
     deleteWord = (item) => {
-       service.deleteWord(item.id);
+        Alert.alert("Dikkat!", item.trMean + " - "+ item.enMean + " kelimesini silmek istediğinize emin misiniz ?", [
+            {text : 'Evet, Sil', onPress : () => service.deleteWord(item.id)},
+            {text : 'Hayır, Vazgeç', style: 'cancel'}
+        ])
+       
     }
     render(){
         console.log(this.props.data)
