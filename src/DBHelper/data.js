@@ -1,5 +1,6 @@
 import { openDatabase,deleteDatabase }from 'react-native-sqlite-storage';
 import { Actions } from 'react-native-router-flux';
+import moment from "moment";
 
 const db = openDatabase({name : 'memorize.db'});
 
@@ -65,11 +66,11 @@ export default class Data {
         })
     }
 
-    updateTeachWord(id){
+    updateTeachWord(id, teach){
         db.transaction((tx) => {
-            tx.executeSql("UPDATE vocabulary SET enMean=?, trMean=?, structor=?, sentence=? WHERE id=?",
-            [id], (tx,res) => {
-                Actions.home();
+            tx.executeSql("UPDATE vocabulary SET teach=?, teachLevel=1, teachDate=?, reminderDate=? WHERE id=?",
+            [teach, moment(new Date()).format('YYYY-MM-DD'), moment(new Date()).add(1, 'days').format('YYYY-MM-DD'), id], (tx,res) => {
+                console.log(res)
             },(err) => console.log(err));
         })
     }

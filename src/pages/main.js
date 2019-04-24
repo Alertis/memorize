@@ -19,7 +19,9 @@ export default class Main extends Component {
     }
 
     componentDidMount(){
-      
+      this.selectWords();
+    }
+    selectWords = () => {
         db.transaction((tx) => {
             tx.executeSql("SELECT * FROM vocabulary", [], (tx,res) => {
                 var data=[];
@@ -32,12 +34,11 @@ export default class Main extends Component {
             },(err) => console.log(err));
         });
     }
-
     render(){
         return(
             <Container>
-                <HeaderComp icon="add" title="Kelimeler" />
-                <Words data={this.state.data}/>
+                <HeaderComp icon="add" title="Kelimeler"  />
+                <Words data={this.state.data} refreshWords={this.selectWords}/>
                 <FooterMenu />
             </Container>
         );

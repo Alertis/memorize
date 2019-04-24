@@ -27,6 +27,11 @@ export default class Words extends Component {
         ])
        
     }
+    
+    updateTeachWord = (item) => {
+        service.updateTeachWord(item.id,item.teach == 1 ? 0 : 1);
+        this.props.refreshWords();
+    }
     render(){
         console.log(this.props.data)
         return(
@@ -53,7 +58,7 @@ export default class Words extends Component {
                                     <Button iconLeft transparent primary>
                                         <Icon type="FontAwesome5" name='edit' onPress={ () => ( this.editWord(item) ) } />
                                     </Button>
-                                    <Switch value={item.teach==1 ? true : false } />
+                                    <Switch value={item.teach==1 ? true : false } onValueChange={ () => (  this.updateTeachWord(item) )} />
                                 </ListItem>
                         ))
                     }
