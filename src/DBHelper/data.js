@@ -74,4 +74,11 @@ export default class Data {
             },(err) => console.log(err));
         })
     }
+    updateAnsweredWord(id,status){
+        if(status === true){
+
+        }else{
+            
+        }
+    }
 }

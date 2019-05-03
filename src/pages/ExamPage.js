@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import { Container, Text } from 'native-base';
+import { Container } from 'native-base';
 import HeaderComp from '../component/header';
 import FooterMenu from '../component/footerMenu';
 import Exam from '../component/exam';
+import FlashMessage,{ showMessage, hideMessage } from "react-native-flash-message";
 import { openDatabase,deleteDatabase }from 'react-native-sqlite-storage';
 import moment from "moment";
 
@@ -67,15 +68,37 @@ export default class ExamPage extends Component {
         });
     }
 
+    chooseAnswer = (trueAnswer,answer, wordId) =>{
+        if(trueAnswer === answer){
+            showMessage({
+                message: "Tebrikler, Doğru cevap",
+                icon: "success",
+                type: "success",
+                onPress: () =>{
+
+                }
+              });
+        }else{
+            showMessage({
+                message: "Üzgünüz. Yanlış cevap",
+                description: "Doğru cevap : "+trueAnswer,
+                icon: "danger",
+                type:"danger"
+              });
+        }
+    }
+
     componentDidMount(){
         this.listExamWords();
+        
     }
 
     render(){
+        
         return(
             <Container>
-                <HeaderComp  title="Yeni Kelime Ekle" />
-                <Exam data={this.state.data} answers={this.state.answers} answerFetch={this.listAnswers} />
+                <HeaderComp  title="Soruları Cevapla" />
+                <Exam data={this.state.data} answers={this.state.answers} answerFetch={this.listAnswers} chooseAnswer={this.chooseAnswer} />
                 <FooterMenu />
             </Container>
         );

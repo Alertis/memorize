@@ -12,6 +12,7 @@
     "native-base": "^2.12.1",
     "react": "16.8.3",
     "react-native": "0.59.2",
+    "react-native-flash-message": "^0.1.12",
     "react-native-material-design": "^0.3.7",
     "react-native-router-flux": "^4.0.6",
     "react-native-sqlite-storage": "^3.3.10",
