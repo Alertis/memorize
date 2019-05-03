@@ -4,11 +4,11 @@ import { Content, Form, Label, Left, Right, Icon, Item, Input, Header, Body, But
 
 export default class WordForm extends Component {
     state = {
-        enWord : this.props.words.enWord ? this.props.words.enWord : '',
-        trWord : this.props.words.trWord ? this.props.words.trWord : '',
-        structor : this.props.words.structor ? this.props.words.structor : '',
-        sentence : this.props.words.sentence ? this.props.words.sentence : '',
-        id : this.props.words.id ? this.props.words.id : null
+        enWord : this.props.words ? this.props.words.enWord : '',
+        trWord : this.props.words ? this.props.words.trWord : '',
+        structor : this.props.words ? this.props.words.structor : '',
+        sentence : this.props.words ? this.props.words.sentence : '',
+        id : this.props.words ? this.props.words.id : null
     }
     saveClick = () =>{
         console.log(this.state);

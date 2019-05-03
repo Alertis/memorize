@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Icon,  Footer, FooterTab, Text, Badge,  } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 import Menu from '../component/buttonMenu';
 
 export default class FooterMenu extends Component{
@@ -10,11 +11,17 @@ export default class FooterMenu extends Component{
         memorized : false 
     }
     activeMenu = (key) =>{
+        
+        switch (key) {
+            case 'test' : 
+                Actions.exam()
+                break;
+            case 'words' : 
+                Actions.home()
+                break;
+        } 
         this.setState({ test : false, words : false, memorized : false})
         this.setState({[key] : true})
-        console.log(this.state)
-        console.log(key)
-
     }
     render(){
         return( 

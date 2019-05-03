@@ -4,7 +4,6 @@ import {Button, Icon, Text, Badge,  } from 'native-base';
 export default class Menu extends Component{
 
     render(){
-        console.log(this.props)
         if(this.props.badge){
             return( 
                 <Button badge vertical active={this.props.active} onPress={ () => (this.props.clickMenu(this.props.keyVal))}>
