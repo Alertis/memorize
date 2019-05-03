@@ -22,7 +22,7 @@ export default class Exam extends Component {
                                     </Body>
                                 </CardItem>
                                 {this.props.answers && this.props.answers.map(answer => (
-                                     <CardItem bordered button onPress={() => ( this.props.chooseAnswer(item.trMean,answer,item.id) )}>
+                                     <CardItem bordered button onPress={() => ( this.props.chooseAnswer(item.trMean,answer,item.id, item.teachLevel, item.teachDate) )}>
                                         <Left>
                                             <Icon type="FontAwesome5"  name="check" /*style={{ color: 'green'}}*//>
                                         </Left>
@@ -36,6 +36,8 @@ export default class Exam extends Component {
                             </Card>
                         ))
                 }
+
+                { this.props.data==null && <Text>Görüntülencek kelime yok. Lütfen daha sonra tekrar kontrol edin</Text>}
                
               
             </Content>

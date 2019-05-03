@@ -6,7 +6,9 @@ import Exam from '../component/exam';
 import FlashMessage,{ showMessage, hideMessage } from "react-native-flash-message";
 import { openDatabase,deleteDatabase }from 'react-native-sqlite-storage';
 import moment from "moment";
+import Data from '../DBHelper/data';
 
+let service = new Data()
 const db = openDatabase({name : 'memorize.db'});
 
 export default class ExamPage extends Component {
@@ -20,7 +22,7 @@ export default class ExamPage extends Component {
 
     listExamWords = () => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT * FROM vocabulary WHERE reminderDate<? and teach=1", [ moment(new Date()).format('YYYY-MM-DD')], (tx,res) => {
+            tx.executeSql("SELECT * FROM vocabulary WHERE reminderDate<=? and teach=1 and teachLevel<>4", [ moment(new Date()).format('YYYY-MM-DD')], (tx,res) => {
                 var data=[];
                 
                 if(res.rows.length>0){
@@ -61,20 +63,22 @@ export default class ExamPage extends Component {
                 if(res.rows.length>0){
                     for (let i = 0; i < res.rows.length; i++) {
                         data.push(res.rows.item(i));
-                    }S
+                    }
                     this.setState({answers : data})
                 }
             },(err) => console.log(err));
         });
     }
 
-    chooseAnswer = (trueAnswer,answer, wordId) =>{
+    chooseAnswer = (trueAnswer,answer, wordId, teachLevel, teachDate) =>{
         if(trueAnswer === answer){
             showMessage({
                 message: "Tebrikler, Doğru cevap",
                 icon: "success",
                 type: "success",
                 onPress: () =>{
+                    service.updateAnsweredWord(wordId, true, teachLevel, teachDate);
+                    this.listExamWords();
 
                 }
               });
@@ -83,9 +87,16 @@ export default class ExamPage extends Component {
                 message: "Üzgünüz. Yanlış cevap",
                 description: "Doğru cevap : "+trueAnswer,
                 icon: "danger",
-                type:"danger"
+                type:"danger",
+                onPress: () =>{
+                    service.updateAnsweredWord(wordId, false, teachLevel, teachDate);
+                    this.listExamWords();
+
+                }
               });
         }
+        this.listExamWords();
+
     }
 
     componentDidMount(){

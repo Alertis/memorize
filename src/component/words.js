@@ -47,7 +47,7 @@ export default class Words extends Component {
                <List>
                     { 
                         this.props.data && this.props.data.map( item => (
-                        
+                            
                                 <ListItem key={item.id} >
                                     <Body>
                                         <Text style={{ fontWeight: "600" }}>{item.enMean} - {item.trMean}</Text>
