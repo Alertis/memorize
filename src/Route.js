@@ -4,7 +4,6 @@ import Main from './pages/main'
 import AddWords from './pages/addWords'
 import ExamPage from './pages/examPage'
 import Memorized from './pages/memorized'
-
 import FlashMessage from "react-native-flash-message";
 
 
@@ -23,9 +22,7 @@ export default class Routes extends Component{
                     </Scene>
                 </Router>
                 <FlashMessage position="center" autoHide={false} />  
-
             </React.Fragment>
-        
         );
     }
 }

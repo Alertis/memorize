@@ -16,11 +16,10 @@ export default class HeaderComp extends Component{
                 </Body>
                 { this.props.icon &&
                 <Right>
-                    
-                         <Button transparent onPress={() => Actions.add()}>
-                            <Icon name={this.props.icon} />
-                            <Text>EKLE</Text>
-                        </Button>
+                    <Button transparent onPress={() => Actions.add()}>
+                        <Icon name={this.props.icon} />
+                        <Text>EKLE</Text>
+                    </Button>
                 </Right>
                   }
             </Header>
