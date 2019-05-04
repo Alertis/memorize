@@ -63,6 +63,7 @@ export default class Words extends Component {
                                 </ListItem>
                         ))
                     }
+                    { this.props.data==null && <Text>Görüntülencek kelime yok. Lütfen daha fazla kelime ekleyin.</Text> }
                     
                 </List>
             </Content>

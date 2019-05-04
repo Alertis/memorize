@@ -14,15 +14,15 @@ export default class HeaderComp extends Component{
                 <Body>
                     <Title>{this.props.title}</Title>
                 </Body>
+                { this.props.icon &&
                 <Right>
-                    { this.props.icon &&
+                    
                          <Button transparent onPress={() => Actions.add()}>
                             <Icon name={this.props.icon} />
                             <Text>EKLE</Text>
                         </Button>
-                    }
-                    
                 </Right>
+                  }
             </Header>
         
         )    
