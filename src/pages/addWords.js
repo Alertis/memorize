@@ -25,7 +25,7 @@ export default class addWords extends Component {
     render(){
         return(
             <Container>
-                <HeaderComp  title="Soruları Cevapla" />
+                <HeaderComp  title="Soru Kaydet" />
                 <WordForm saveClick={this.save} updateClick={ this.update } words={this.props.words}/>
                 <FooterMenu />
             </Container>
