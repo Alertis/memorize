@@ -5,33 +5,44 @@ import { Content, Card, CardItem, Body, Icon,Right, Left} from 'native-base';
 
 
 export default class Exam extends Component {
-    
+    constructor(props){
+        super(props);
+      }
     render(){
-        console.log(this.props.answers)
+        
+        var count=-1;
+        counter=()=>{
+         count=count+1;
+        }
         return(
             <Content>
-
                 { 
                         this.props.data && this.props.data.map( item => (
                             <Card key={item.id}>
+                            {counter()}
                                 <CardItem bordered>
                                     <Body>
                                         <Text>
                                             <Text style={{fontWeight: "bold", fontSize:18}}>{item.enMean}</Text> kelimesinin türkçe karşılığı nedir ?
                                         </Text>
                                     </Body>
+
                                 </CardItem>
-                                {this.props.answers && this.props.answers.map(answer => (
+                                {console.log(count)}
+                                {
+                                    this.props.answers && this.props.answers.slice(count*4,(count*4)+4).map(answer => (
                                      <CardItem bordered button onPress={() => ( this.props.chooseAnswer(item.trMean,answer,item.id, item.teachLevel, item.teachDate) )}>
-                                        <Left>
-                                            <Icon type="FontAwesome5"  name="check" /*style={{ color: 'green'}}*//>
-                                        </Left>
-                                        <Text>{answer}</Text>
-                                        <Right>
-                                            <Icon name="arrow-forward" />
-                                        </Right>
-                                    </CardItem>
-                                ))}
+                                        
+                                     <Left>
+                                         <Icon type="FontAwesome5"  name="check" />
+                                     </Left>
+                                     <Text>{answer}</Text>
+                                     <Right>
+                                         <Icon name="arrow-forward" />
+                                     </Right>
+                                 </CardItem>
+                                ))
+                                }
              
                             </Card>
                         ))

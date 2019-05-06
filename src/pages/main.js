@@ -3,10 +3,8 @@ import { Container } from 'native-base';
 import HeaderComp from '../component/header';
 import FooterMenu from '../component/footerMenu';
 import Words from '../component/words';
-import { openDatabase,deleteDatabase }from 'react-native-sqlite-storage';
-//import Data from '../DBHelper/data';
+import { openDatabase }from 'react-native-sqlite-storage';
 
-//let service = new Data()
 
 const db = openDatabase({name : 'memorize.db'});
 

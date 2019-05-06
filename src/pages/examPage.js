@@ -24,12 +24,11 @@ export default class ExamPage extends Component {
         db.transaction((tx) => {
             tx.executeSql("SELECT * FROM vocabulary WHERE reminderDate<=? and teach=1 and teachLevel<>4", [ moment(new Date()).format('YYYY-MM-DD')], (tx,res) => {
                 var data=[];
-                
+                var answers=[]
                 if(res.rows.length>0){
                     for (let i = 0; i < res.rows.length; i++) {
                         data.push(res.rows.item(i));
                         db.transaction((tx) => {
-                            var answers=[]
                             tx.executeSql("SELECT * FROM vocabulary WHERE id<>? ORDER BY random() limit 3", [ data[i].id ], (tx,res) => {
                                 if(res.rows.length>0){
                                     for (let i = 0; i < res.rows.length; i++) {
@@ -37,14 +36,12 @@ export default class ExamPage extends Component {
                                     }
                                     answers.push(data[i].trMean);
                                     var  j, temp;
-                                    for (let i = answers.length-1; i>0; i--){
-                                    console.log('answers')
-
-                                        j=Math.floor(Math.random() * (i+1));
+                                    for (let i = answers.length-1; i>answers.length-4; i--){
+                                        j=Math.floor(Math.random() * 3) + (answers.length-3);
                                         temp = answers[i];
                                         answers[i] = answers[j];
                                         answers[j] = temp;
-                                    }
+                                    }                   
                                     this.setState({answers : answers})
                                 }
                             },(err) => console.log(err));
