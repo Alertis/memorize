@@ -4,7 +4,9 @@ import HeaderComp from '../component/header';
 import FooterMenu from '../component/footerMenu';
 import Words from '../component/words';
 import { openDatabase }from 'react-native-sqlite-storage';
+import Data from '../DBHelper/data';
 
+let service = new Data()
 
 const db = openDatabase({name : 'memorize.db'});
 
@@ -14,11 +16,13 @@ export default class Main extends Component {
         this.state = {
             data: null
         }
+        service.init();
     }
 
     componentDidMount(){
       this.selectWords();
     }
+    
     selectWords = () => {
         db.transaction((tx) => {
             tx.executeSql("SELECT * FROM vocabulary", [], (tx,res) => {
@@ -41,10 +45,8 @@ export default class Main extends Component {
                     for (let i = 0; i < res.rows.length; i++) {
                         data.push(res.rows.item(i));
                     }
-                    this.setState({data : data})
-                }else{
-                    this.setState({data : null}) 
                 }
+                this.setState({data : data})
             })
         })
     }

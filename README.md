@@ -30,7 +30,7 @@
 
 
 <!-- TABLE OF CONTENTS -->
-## Table of Contents
+## İçerik
 
 * [Proje Hakkında](#proje-hakkında)
   * [Kullanılan Paketler](#kullanılan-paketler)

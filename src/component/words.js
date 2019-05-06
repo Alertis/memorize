@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {Text, Alert} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Content, List, ListItem, Left, Right, Icon, Item, Input, Header, Body, Button, Switch  } from 'native-base';
-import Data from '../DBHelper/data';
+import Word from '../class/word';
 
-let service = new Data()
+let service = new Word()
 
 
 export default class Words extends Component {
@@ -34,7 +34,6 @@ export default class Words extends Component {
     }
 
     render(){
-        console.log(this.props.data)
         return(
             <Content>
                <Header searchBar>

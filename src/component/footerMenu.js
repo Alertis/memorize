@@ -3,7 +3,7 @@ import { Footer, FooterTab  } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Menu from '../component/buttonMenu';
 import moment from "moment";
-import { openDatabase,deleteDatabase }from 'react-native-sqlite-storage';
+import { openDatabase }from 'react-native-sqlite-storage';
 
 
 const db = openDatabase({name : 'memorize.db'});

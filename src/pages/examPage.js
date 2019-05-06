@@ -6,9 +6,9 @@ import Exam from '../component/exam';
 import FlashMessage,{ showMessage, hideMessage } from "react-native-flash-message";
 import { openDatabase,deleteDatabase }from 'react-native-sqlite-storage';
 import moment from "moment";
-import Data from '../DBHelper/data';
+import ExamClass from '../class/exam';
 
-let service = new Data()
+let service = new ExamClass()
 const db = openDatabase({name : 'memorize.db'});
 
 export default class ExamPage extends Component {

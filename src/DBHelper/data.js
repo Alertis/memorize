@@ -36,10 +36,10 @@ export default class Data {
                  (tx,res) => console.log("Database Created"),
                  (err) => console.log(err)
             )
-            tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('go', 'gitmek', 'fiil', 'I am going to be late for work', 0, 0)");
-            tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('look', 'bakmak', 'fiil', 'people were looking at him', 0, 0)");
-            tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('be', 'olmak', 'fiil', 'the exhibition will be in November', 0, 0)");
-            tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('begin', 'başlatmak', 'fiil', 'it is a good place to begin', 0, 0)");
+            tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('bakmak', 'look', 'fiil', 'people were looking at him', 0, 0)");
+            tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('gitmek', 'go', 'fiil', 'I am going to be late for work', 0, 0)");
+            tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('olmak', 'be', 'fiil', 'the exhibition will be in November', 0, 0)");
+            tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('başlatmak', 'begin', 'fiil', 'it is a good place to begin', 0, 0)");
             tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('üflemek', 'blow', 'fiil', 'A little puff is enough to make it fall.', 0, 0)");
             tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('kırmak', 'break', 'fiil', 'the rope broke with a loud snap', 0, 0)");
             tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('getirmek', 'bring', 'fiil', 'she brought Luke home from the hospital', 0, 0)");
@@ -77,85 +77,10 @@ export default class Data {
             tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('Eylül', 'September', 'isim', 'sow the plants in early September', 0, 0)");
             tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('Ekim', 'October', 'isim', 'the project started in October', 0, 0)");
             tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('Kasım', 'November', 'isim', 'the store opened in November', 0, 0)");
+            
             tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('Aralık', 'December', 'isim', 'the fuel shortage worsened during December', 0, 0)");
+        })
+    }
    
-        })
-    }
-    addWord(enMean, trMean, structor, sentence){
-        db.transaction((tx) => {
-            tx.executeSql("INSERT INTO vocabulary (enMean, trMean, structor, sentence, teach, teachLevel) VALUES (?, ?, ?, ?, 0, 0)",
-            [enMean, trMean, structor, sentence], (tx,res) => {
-                Actions.home();
-            },(err) => console.log(err));
-        })
-    }
-
-    updateWord(id, enMean, trMean, structor, sentence){
-        db.transaction((tx) => {
-            tx.executeSql("UPDATE vocabulary SET enMean=?, trMean=?, structor=?, sentence=? WHERE id=?",
-            [enMean, trMean, structor, sentence, id], (tx,res) => {
-                Actions.home();
-            },(err) => console.log(err));
-        })
-    }
-
-    deleteWord(id){
-        db.transaction((tx) => {
-            tx.executeSql("DELETE FROM vocabulary WHERE id=?",
-            [id], (tx,res) => {
-                Actions.home();
-            },(err) => console.log(err));
-        })
-    }
-
-    updateTeachWord(id, teach){
-        db.transaction((tx) => {
-            tx.executeSql("UPDATE vocabulary SET teach=?, teachLevel=1, teachDate=?, reminderDate=? WHERE id=?",
-            [teach, moment(new Date()).format('YYYY-MM-DD'), moment(new Date()).add(1, 'days').format('YYYY-MM-DD'), id], (tx,res) => {
-                console.log(res)
-            },(err) => console.log(err));
-        })
-    }
-    updateAnsweredWord(id, status, teachLevel, teachDate){
-        if(status === true){
-            var days;
-            switch(teachLevel){
-                case 1 :
-                   days=7;
-                   break;
-                case 2 :
-                    days=30;
-                    break;
-                case 3 :
-                    days=180;
-                    break;
-                default : 
-                    days=0;
-                    break; 
-            }
-            console.days
-            if(days !== 0){
-                db.transaction((tx) => {
-                    tx.executeSql("UPDATE vocabulary SET  teachLevel=?,  reminderDate=? WHERE id=?",
-                    [teachLevel+1, moment(teachDate).add(days, 'days').format('YYYY-MM-DD'), id], (tx,res) => {
-                        console.log(res)
-                    },(err) => console.log(err));
-                })   
-            }else{
-                db.transaction((tx) => {
-                    tx.executeSql("UPDATE vocabulary SET  teachLevel=4 WHERE id=?",
-                    [id], (tx,res) => {
-                        console.log(res)
-                    },(err) => console.log(err));
-                })   
-            }
-        }else{
-            db.transaction((tx) => {
-                tx.executeSql("UPDATE vocabulary SET teachLevel=1, teachDate=?, reminderDate=? WHERE id=?",
-                [ moment(new Date()).format('YYYY-MM-DD'), moment(new Date()).add(1, 'days').format('YYYY-MM-DD'), id], (tx,res) => {
-                    console.log(res)
-                },(err) => console.log(err));
-            })
-        }
-    }
+   
 }

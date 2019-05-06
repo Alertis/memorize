@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import {Text} from 'react-native';
 import { Content, List, ListItem, Icon, Item, Input, Header, Body } from 'native-base';
-import Data from '../DBHelper/data';
-
-let service = new Data()
 
 
 export default class Words extends Component {

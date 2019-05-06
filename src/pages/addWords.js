@@ -3,15 +3,13 @@ import { Container, Text } from 'native-base';
 import HeaderComp from '../component/header';
 import FooterMenu from '../component/footerMenu';
 import WordForm from '../component/addWordForm';
-import { openDatabase,deleteDatabase }from 'react-native-sqlite-storage';
-import Data from '../DBHelper/data';
+import Word from '../class/word';
 
-let service = new Data()
+let service = new Word()
 
 export default class addWords extends Component {
     constructor(props){
         super(props);
-        service.init();
     }
 
     save = (enMean, trMean, structor, sentence) => {
