@@ -14,8 +14,17 @@ export default class Data {
                 if(res.rows.length == 0)
                     this.createDefaultData();
                 else
-                    console.log("Already exist database!")
+                    this.deleteOldWords();                  
             })
+        })
+    }
+
+    deleteOldWords(){
+        db.transaction((tx) => {
+            tx.executeSql("UPDATE vocabulary set teachLevel=1, teachDate=?, reminderDate=? WHERE reminderDate<?", 
+            [(new Date()).format('YYYY-MM-DD'), moment(new Date()).add(1, 'days').format('YYYY-MM-DD'),(new Date()).format('YYYY-MM-DD')],(tx,res) => {
+                console.log(res)
+            },(err) => console.log(err));
         })
     }
 
@@ -77,7 +86,6 @@ export default class Data {
             tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('Eylül', 'September', 'isim', 'sow the plants in early September', 0, 0)");
             tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('Ekim', 'October', 'isim', 'the project started in October', 0, 0)");
             tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('Kasım', 'November', 'isim', 'the store opened in November', 0, 0)");
-            
             tx.executeSql("INSERT INTO vocabulary ( trMean, enMean, structor, sentence, teach, teachLevel) VALUES ('Aralık', 'December', 'isim', 'the fuel shortage worsened during December', 0, 0)");
         })
     }
