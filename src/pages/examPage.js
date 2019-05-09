@@ -22,30 +22,14 @@ export default class ExamPage extends Component {
 
     listExamWords = () => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT * FROM vocabulary WHERE reminderDate<=? and teach=1 and teachLevel<>4", [ moment(new Date()).format('YYYY-MM-DD')], (tx,res) => {
+            tx.executeSql("SELECT * FROM vocabulary WHERE reminderDate<=? and teach=1 and teachLevel<>4", [ /*moment(new Date()).format('YYYY-MM-DD')*/ '2019-05-10'], (tx,res) => {
                 var data=[];
                 var answers=[]
                 if(res.rows.length>0){
                     for (let i = 0; i < res.rows.length; i++) {
                         data.push(res.rows.item(i));
-                        db.transaction((tx) => {
-                            tx.executeSql("SELECT * FROM vocabulary WHERE id<>? ORDER BY random() limit 3", [ data[i].id ], (tx,res) => {
-                                if(res.rows.length>0){
-                                    for (let i = 0; i < res.rows.length; i++) {
-                                        answers.push(res.rows.item(i).trMean);
-                                    }
-                                    answers.push(data[i].trMean);
-                                    var  j, temp;
-                                    for (let i = answers.length-1; i>answers.length-4; i--){
-                                        j=Math.floor(Math.random() * 3) + (answers.length-3);
-                                        temp = answers[i];
-                                        answers[i] = answers[j];
-                                        answers[j] = temp;
-                                    }                   
-                                    this.setState({answers : answers})
-                                }
-                            },(err) => console.log(err));
-                        });
+                        this.listAnswers(data[i].id,data[i].trMean,answers)
+                  
                     }
                     this.setState({data : data})
                 }
@@ -53,18 +37,29 @@ export default class ExamPage extends Component {
         });
     }
 
-    listAnswers = (id) => {
+    listAnswers = (id,trMean,answers) => {
         db.transaction((tx) => {
             tx.executeSql("SELECT * FROM vocabulary WHERE id<>? ORDER BY random() limit 3", [ id ], (tx,res) => {
-                var data=[];
                 if(res.rows.length>0){
                     for (let i = 0; i < res.rows.length; i++) {
-                        data.push(res.rows.item(i));
+                        answers.push(res.rows.item(i).trMean);
                     }
-                    this.setState({answers : data})
+                    answers.push(trMean);
+                    this.shuffleAnswers(answers);
                 }
             },(err) => console.log(err));
         });
+    }
+
+    shuffleAnswers = (answers) => {
+        var  j, temp;
+        for (let i = answers.length-1; i>answers.length-4; i--){
+            j=Math.floor(Math.random() * 3) + (answers.length-3);
+            temp = answers[i];
+            answers[i] = answers[j];
+            answers[j] = temp;
+        }                   
+        this.setState({answers : answers})
     }
 
     chooseAnswer = (trueAnswer,answer, wordId, teachLevel, teachDate) =>{
@@ -106,7 +101,7 @@ export default class ExamPage extends Component {
         return(
             <Container>
                 <HeaderComp  title="Soruları Cevapla" />
-                <Exam data={this.state.data} answers={this.state.answers} answerFetch={this.listAnswers} chooseAnswer={this.chooseAnswer} />
+                <Exam data={this.state.data} answers={this.state.answers} chooseAnswer={this.chooseAnswer} />
                 <FooterMenu />
             </Container>
         );
