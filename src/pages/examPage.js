@@ -3,9 +3,8 @@ import { Container } from 'native-base';
 import HeaderComp from '../component/header';
 import FooterMenu from '../component/footerMenu';
 import Exam from '../component/exam';
-import FlashMessage,{ showMessage, hideMessage } from "react-native-flash-message";
+import { showMessage } from "react-native-flash-message";
 import { openDatabase,deleteDatabase }from 'react-native-sqlite-storage';
-import moment from "moment";
 import ExamClass from '../class/exam';
 
 let service = new ExamClass()

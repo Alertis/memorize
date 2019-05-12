@@ -31,8 +31,8 @@ export default class Exam {
                 })   
             }else{
                 db.transaction((tx) => {
-                    tx.executeSql("UPDATE vocabulary SET  teachLevel=4 WHERE id=?",
-                    [id], (tx,res) => {
+                    tx.executeSql("UPDATE vocabulary SET  teachLevel=4, teachDate=? WHERE id=?",
+                    [moment(new Date()).format('YYYY-MM-DD'),id], (tx,res) => {
                         console.log(res)
                     },(err) => console.log(err));
                 })   

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container } from 'native-base';
+import { Container,Content, ListItem, Left, Right, Text, Radio } from 'native-base';
 import HeaderComp from '../component/header';
 import FooterMenu from '../component/footerMenu';
 import MemorizedWords from '../component/memorizedWords';
@@ -52,7 +52,7 @@ export default class Main extends Component {
     render(){
         return(
             <Container>
-                <HeaderComp title="Öğrendiğim Kelimeler"   />
+                <HeaderComp title="Raporlar"   />
                 <MemorizedWords data={this.state.data} refreshWords={this.selectMemorizedWords} search={this.searchWords}/>
                 <FooterMenu />
             </Container>
