@@ -21,7 +21,7 @@ export default class Data {
 
     deleteOldWords(){
         db.transaction((tx) => {
-            tx.executeSql("UPDATE vocabulary set teachLevel=1, teachDate=?, reminderDate=? WHERE reminderDate<?", 
+            tx.executeSql("UPDATE vocabulary set teachLevel=1, teachDate=?, reminderDate=? WHERE reminderDate<? and teachLevel<>4", 
             [(new Date()).format('YYYY-MM-DD'), moment(new Date()).add(1, 'days').format('YYYY-MM-DD'),(new Date()).format('YYYY-MM-DD')],(tx,res) => {
                 console.log(res)
             },(err) => console.log(err));

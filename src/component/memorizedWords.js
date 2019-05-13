@@ -35,40 +35,40 @@ export default class Words extends Component {
         for (let i = 0; i < length; i++) {
             console.log(rows)
             switch (moment(rows.item(i).teachDate).format('MMMM')){
-                case 'Jan' :
+                case 'January' :
                     jan++;
                     break;
-                case 'Feb' :
+                case 'February' :
                     feb++;
                     break;
-                case 'Mar' :
+                case 'March' :
                     mar++;
                     break;
-                case 'Apr' :
+                case 'April' :
                     apr++;
                     break;
                 case 'May' :
                     may++;
                     break;
-                case 'Jun' :
+                case 'June' :
                     jun++;
                     break;
-                case 'Jul' :
+                case 'July' :
                     jul++;
                     break;
-                case 'Aug' :
+                case 'August' :
                     aug++;
                     break;
-                case 'Sep' :
+                case 'September' :
                     sep++;
                     break;
-                case 'Oct' :
+                case 'October' :
                     oct++;
                     break;
-                case 'Nov' :
+                case 'Novomber' :
                     nov++;
                     break;
-                case 'Dec' :
+                case 'December' :
                     dec++;
                     break;
                 default :

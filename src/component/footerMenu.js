@@ -16,7 +16,7 @@ export default class FooterMenu extends Component{
     }
     countTestWords = () => {
         db.transaction((tx) => {
-            tx.executeSql("SELECT count(*) as countWords FROM vocabulary WHERE reminderDate<=? and teach=1 and teachLevel<>4", [ moment(new Date()).format('YYYY-MM-DD')], (tx,res) => {
+            tx.executeSql("SELECT count(*) as countWords FROM vocabulary WHERE reminderDate=? and teach=1 and teachLevel<>4", [ moment(new Date()).format('YYYY-MM-DD')], (tx,res) => {
                 this.setState({count : res.rows.item(0).countWords})
             },(err) => console.log(err));
         });
@@ -27,7 +27,7 @@ export default class FooterMenu extends Component{
                 <FooterTab>
                     <Menu badge={this.state.count == 0 ? false : true} count={this.state.count} icon="pencil-ruler" title="TEST" clickMenu={() => ( Actions.exam())} />
                     <Menu badge={false} count="0" icon="language" title="KELİMELER" clickMenu={() => ( Actions.home())} />
-                    <Menu badge={false} count="0" icon="bookmark" title="ÖĞRENDİKLERİM"  clickMenu={() => ( Actions.memorized())} />                  
+                    <Menu badge={false} count="0" icon="bookmark" title="RAPORLAR"  clickMenu={() => ( Actions.memorized())} />                  
                     
                 </FooterTab>
             </Footer>
