@@ -13,147 +13,142 @@ export default class Words extends Component {
         finishDate : null,
         data: null
     }
-    monthlyReport = () =>{
+    calculateReport = (reportType) =>{
         if(this.state.startDate && this.state.finishDate){
             db.transaction((tx) => {
                 tx.executeSql("SELECT * FROM vocabulary WHERE teachDate between ? and ?", 
                 [moment(this.state.startDate).format('YYYY-MM-DD'), moment(this.state.finishDate).format('YYYY-MM-DD') ], (tx,res) => {
-                    var jan=0, feb=0, mar=0, apr=0, may=0, jun=0, jul=0, aug=0, sep=0, oct=0, nov=0, dec=0;
                     if(res.rows.length>0){
-                        for (let i = 0; i < res.rows.length; i++) {
-
-                            switch (moment(res.rows.item(i).teachDate).format('MMMM')){
-                                case 'Jan' :
-                                    jan++;
-                                    break;
-                                case 'Feb' :
-                                    feb++;
-                                    break;
-                                case 'Mar' :
-                                    mar++;
-                                    break;
-                                case 'Apr' :
-                                    apr++;
-                                    break;
-                                case 'May' :
-                                    may++;
-                                    break;
-                                case 'Jun' :
-                                    jun++;
-                                    break;
-                                case 'Jul' :
-                                    jul++;
-                                    break;
-                                case 'Aug' :
-                                    aug++;
-                                    break;
-                                case 'Sep' :
-                                    sep++;
-                                    break;
-                                case 'Oct' :
-                                    oct++;
-                                    break;
-                                case 'Nov' :
-                                    nov++;
-                                    break;
-                                case 'Dec' :
-                                    dec++;
-                                    break;
-                                default :
-                                    console.log(moment(res.rows.item(i).teachDate).format('MMMM'))
-                                    break;
-                                    
-                            }
-                        }
-                        console.log(may)
-                        var data = [
-                            {
-                                data:[
-                                    {x : 'Ocak', y: jan},
-                                    {x : 'Şubat', y: feb},
-                                    {x : 'Mart', y: mar},
-                                    {x : 'Nisan', y: apr},
-                                    {x : 'Mayıs', y: may},
-                                    {x : 'Haziran', y: jun},
-                                    {x : 'Temmuz', y: jul},
-                                    {x : 'Ağustos', y: aug},
-                                    {x : 'Eylül', y: sep},
-                                    {x : 'Ekim', y: oct},
-                                    {x : 'Kasım', y: nov},
-                                    {x : 'Aralık', y: dec},
-
-                                ],
-                                color: '#297AB1'
-                            }
-                        ];
-                       
-                        this.setState({data : data})
-
+                        if(reportType=="daily")
+                            this.dailyGraphic(res.rows.length, res.rows);                        
+                        else if (reportType=="monthly")
+                            this.monthlyGraphic(res.rows.length, res.rows);
                     }
                 },(err) => console.log(err));
             });
 
         }
     }
-    dailyReport = () =>{
-        if(this.state.startDate && this.state.finishDate){
-            db.transaction((tx) => {
-                tx.executeSql("SELECT * FROM vocabulary WHERE teachDate between ? and ?", 
-                [moment(this.state.startDate).format('YYYY-MM-DD'), moment(this.state.finishDate).format('YYYY-MM-DD') ], (tx,res) => {
-                    var mon=0, tue=0, wed=0, thu=0, fri=0, sat=0, sun=0;
-                    if(res.rows.length>0){
-                        for (let i = 0; i < res.rows.length; i++) {
-                            switch (moment(res.rows.item(i).teachDate).format('dddd')){
-                                case 'Monday' :
-                                    mon=mon+1;
-                                    break;
-                                case 'Tuesday' :
-                                    tue++;
-                                    break;
-                                case 'Wednesday' :
-                                    wed++;
-                                    break;
-                                case 'Thursday' :
-                                    thu=thu+1;
-                                    break;
-                                case 'Friday' :
-                                    fri++;
-                                    break;
-                                case 'Saturday' :
-                                    sat++;
-                                    break;
-                                case 'Sunday' :
-                                    sun++;
-                                    break;
-                                default :
-                                    console.log(moment(res.rows.item(i).teachDate).format('dddd'))
-                                    break;
-                                    
-                            }
-                        }
-                        var data = [
-                            {
-                                data:[
-                                    {x : 'Pazartesi', y: mon},
-                                    {x : 'Salı', y: tue},
-                                    {x : 'Çarşamba', y: wed},
-                                    {x : 'Perşembe', y: thu},
-                                    {x : 'Cuma', y: fri},
-                                    {x : 'Cumartesi', y: sat},
-                                    {x : 'Pazar', y: sun}
-                                ],
-                                color: '#297AB1'
-                            }
-                        ];
-                       
-                        this.setState({data : data})
-
-                    }
-                },(err) => console.log(err));
-            });
-
+  
+    monthlyGraphic = (length, rows) => {
+        var jan=0, feb=0, mar=0, apr=0, may=0, jun=0, jul=0, aug=0, sep=0, oct=0, nov=0, dec=0;
+        for (let i = 0; i < length; i++) {
+            console.log(rows)
+            switch (moment(rows.item(i).teachDate).format('MMMM')){
+                case 'Jan' :
+                    jan++;
+                    break;
+                case 'Feb' :
+                    feb++;
+                    break;
+                case 'Mar' :
+                    mar++;
+                    break;
+                case 'Apr' :
+                    apr++;
+                    break;
+                case 'May' :
+                    may++;
+                    break;
+                case 'Jun' :
+                    jun++;
+                    break;
+                case 'Jul' :
+                    jul++;
+                    break;
+                case 'Aug' :
+                    aug++;
+                    break;
+                case 'Sep' :
+                    sep++;
+                    break;
+                case 'Oct' :
+                    oct++;
+                    break;
+                case 'Nov' :
+                    nov++;
+                    break;
+                case 'Dec' :
+                    dec++;
+                    break;
+                default :
+                    console.log(moment(rows.item(i).teachDate).format('MMMM'))
+                    break;
+            }
         }
+        var data = [
+            {
+                data:[
+                    {x : 'Ocak', y: jan},
+                    {x : 'Şubat', y: feb},
+                    {x : 'Mart', y: mar},
+                    {x : 'Nisan', y: apr},
+                    {x : 'Mayıs', y: may},
+                    {x : 'Haziran', y: jun},
+                    {x : 'Temmuz', y: jul},
+                    {x : 'Ağustos', y: aug},
+                    {x : 'Eylül', y: sep},
+                    {x : 'Ekim', y: oct},
+                    {x : 'Kasım', y: nov},
+                    {x : 'Aralık', y: dec},
+
+                ],
+                color: '#297AB1'
+            }
+        ];
+       
+        this.setState({data : data})
     }
+    dailyGraphic = (length, rows) => {
+        var mon=0, tue=0, wed=0, thu=0, fri=0, sat=0, sun=0;
+        for (let i = 0; i < length; i++) {
+            switch (moment(rows.item(i).teachDate).format('dddd')){
+                case 'Monday' :
+                    mon=mon+1;
+                    break;
+                case 'Tuesday' :
+                    tue++;
+                    break;
+                case 'Wednesday' :
+                    wed++;
+                    break;
+                case 'Thursday' :
+                    thu=thu+1;
+                    break;
+                case 'Friday' :
+                    fri++;
+                    break;
+                case 'Saturday' :
+                    sat++;
+                    break;
+                case 'Sunday' :
+                    sun++;
+                    break;
+                default :
+                    console.log(moment(rows.item(i).teachDate).format('dddd'))
+                    break;                    
+            }
+            var data = [
+                {
+                    data:[
+                        {x : 'Pazartesi', y: mon} ,
+                        {x : 'Salı', y: tue} ,
+                        {x : 'Çarşamba', y: wed},
+                        {x : 'Perşembe', y: thu},
+                        {x : 'Cuma', y: fri},
+                        {x : 'Cumartesi', y: sat},
+                        {x : 'Pazar', y: sun}
+                    ],
+                    color: '#297AB1'
+                }
+            ];
+           
+            this.setState({data : data})
+            console.log(data);
+        }
+
+    }
+    
     render(){
        
         return(
@@ -182,7 +177,7 @@ export default class Words extends Component {
                             </Body>
                             <Right>
                         
-                               <Button bordered onPress={() => this.dailyReport() } >
+                               <Button bordered onPress={() => this.calculateReport('daily') } >
                                     <Text>Raporla</Text>
                                 </Button>   
                             </Right>
@@ -223,7 +218,7 @@ export default class Words extends Component {
                             </Body>
                             <Right>
                         
-                            <Button bordered onPress={() => this.monthlyReport() } >
+                            <Button bordered onPress={() => this.calculateReport('monthly') } >
                                     <Text>Raporla</Text>
                                 </Button>   
                             </Right>
