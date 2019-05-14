@@ -5,7 +5,9 @@ import FooterMenu from '../component/footerMenu';
 import Exam from '../component/exam';
 import { showMessage } from "react-native-flash-message";
 import { openDatabase,deleteDatabase }from 'react-native-sqlite-storage';
+import { Actions } from 'react-native-router-flux';
 import ExamClass from '../class/exam';
+import moment from "moment";
 
 let service = new ExamClass()
 const db = openDatabase({name : 'memorize.db'});
@@ -20,8 +22,11 @@ export default class ExamPage extends Component {
     }
 
     listExamWords = () => {
+        console.log(moment(new Date()).format('YYYY-MM-DD'))
+
         db.transaction((tx) => {
             tx.executeSql("SELECT * FROM vocabulary WHERE reminderDate=? and teach=1 and teachLevel<>4", [ moment(new Date()).format('YYYY-MM-DD')], (tx,res) => {
+                console.log(moment(new Date()).format('YYYY-MM-DD'))
                 var data=[];
                 var answers=[]
                 if(res.rows.length>0){
@@ -69,7 +74,7 @@ export default class ExamPage extends Component {
                 type: "success",
                 onPress: () =>{
                     service.updateAnsweredWord(wordId, true, teachLevel, teachDate);
-                    this.listExamWords();
+                    Actions.refresh({key : Actions.exam()});
 
                 }
               });
@@ -81,12 +86,10 @@ export default class ExamPage extends Component {
                 type:"danger",
                 onPress: () =>{
                     service.updateAnsweredWord(wordId, false, teachLevel, teachDate);
-                    this.listExamWords();
-
+                    Actions.refresh({key : Actions.exam()});
                 }
               });
         }
-        this.listExamWords();
 
     }
 

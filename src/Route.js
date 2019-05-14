@@ -6,8 +6,6 @@ import ExamPage from './pages/examPage'
 import Memorized from './pages/memorized'
 import FlashMessage from "react-native-flash-message";
 
-
-
 export default class Routes extends Component{
     render(){
         return(
@@ -18,7 +16,6 @@ export default class Routes extends Component{
                         <Scene key="add" component={AddWords} hideNavBar />
                         <Scene key="exam" component={ExamPage} hideNavBar />
                         <Scene key="memorized" component={Memorized} hideNavBar />
-
                     </Scene>
                 </Router>
                 <FlashMessage position="center" autoHide={false} />  

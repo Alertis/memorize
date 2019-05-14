@@ -33,7 +33,6 @@ export default class Words extends Component {
     monthlyGraphic = (length, rows) => {
         var jan=0, feb=0, mar=0, apr=0, may=0, jun=0, jul=0, aug=0, sep=0, oct=0, nov=0, dec=0;
         for (let i = 0; i < length; i++) {
-            console.log(rows)
             switch (moment(rows.item(i).teachDate).format('MMMM')){
                 case 'January' :
                     jan++;
@@ -144,7 +143,6 @@ export default class Words extends Component {
             ];
            
             this.setState({data : data})
-            console.log(data);
         }
 
     }
@@ -241,13 +239,3 @@ export default class Words extends Component {
         )
     }
 }
-
-/**
- *  <PureChart 
-                                type={'bar'}
-                                data={data}
-                                width={'100%'}
-                                height={200}
-                                showEvenNumberXaxisLabel={false}
-                           />
- */
