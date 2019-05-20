@@ -5,7 +5,6 @@ import Menu from '../component/buttonMenu';
 import moment from "moment";
 import { openDatabase }from 'react-native-sqlite-storage';
 
-
 const db = openDatabase({name : 'memorize.db'});
 export default class FooterMenu extends Component{
     state ={

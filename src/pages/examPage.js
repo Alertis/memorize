@@ -22,11 +22,8 @@ export default class ExamPage extends Component {
     }
 
     listExamWords = () => {
-        console.log(moment(new Date()).format('YYYY-MM-DD'))
-
         db.transaction((tx) => {
             tx.executeSql("SELECT * FROM vocabulary WHERE reminderDate=? and teach=1 and teachLevel<>4", [ moment(new Date()).format('YYYY-MM-DD')], (tx,res) => {
-                console.log(moment(new Date()).format('YYYY-MM-DD'))
                 var data=[];
                 var answers=[]
                 if(res.rows.length>0){

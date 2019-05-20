@@ -7,8 +7,7 @@ export default class Exam extends Component {
     constructor(props){
         super(props);
       }
-    render(){
-        
+    render(){        
         var count=-1;
         counter=()=>{
          count=count+1;
@@ -46,10 +45,7 @@ export default class Exam extends Component {
                             </Card>
                         ))
                 }
-
                 { this.props.data==null && <Text>Görüntülencek kelime yok. Lütfen daha sonra tekrar kontrol edin</Text>}
-               
-              
             </Content>
         )
     }
