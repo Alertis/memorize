@@ -29,7 +29,7 @@ export default class Words extends Component {
     }
     
     updateTeachWord = (item) => {
-        service.updateTeachWord(item.id,item.teach == 1 ? 0 : 1);
+        service.updateTeachWord(item.id,item.teach == 1 ? 0 : 1, item.enMean);
         this.props.refreshWords();
     }
 

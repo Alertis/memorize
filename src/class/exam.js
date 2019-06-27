@@ -1,11 +1,13 @@
 import { openDatabase }from 'react-native-sqlite-storage';
 import moment from "moment";
+import pushSender from './pushSender';
 
 const db = openDatabase({name : 'memorize.db'});
+let Notification = new pushSender()
 
 export default class Exam {
 
-    updateAnsweredWord(id, status, teachLevel, teachDate){
+    updateAnsweredWord(id, status, teachLevel, teachDate, enMean){
         if(status === true){
             var days;
             switch(teachLevel){
@@ -26,7 +28,7 @@ export default class Exam {
                 db.transaction((tx) => {
                     tx.executeSql("UPDATE vocabulary SET  teachLevel=?,  reminderDate=? WHERE id=?",
                     [teachLevel+1, moment(teachDate).add(days, 'days').format('YYYY-MM-DD'), id], (tx,res) => {
-                        console.log(res)
+                        Notification.SendNotification(enMean, moment(teachDate).add(days, 'days').format('YYYY-MM-DD') );
                     },(err) => console.log(err));
                 })   
             }else{

@@ -70,7 +70,7 @@ export default class ExamPage extends Component {
                 icon: "success",
                 type: "success",
                 onPress: () =>{
-                    service.updateAnsweredWord(wordId, true, teachLevel, teachDate);
+                    service.updateAnsweredWord(wordId, true, teachLevel, teachDate, trueAnswer);
                     Actions.refresh({key : Actions.exam()});
 
                 }
@@ -82,7 +82,7 @@ export default class ExamPage extends Component {
                 icon: "danger",
                 type:"danger",
                 onPress: () =>{
-                    service.updateAnsweredWord(wordId, false, teachLevel, teachDate);
+                    service.updateAnsweredWord(wordId, false, teachLevel, teachDate, trueAnswer);
                     Actions.refresh({key : Actions.exam()});
                 }
               });

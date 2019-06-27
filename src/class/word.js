@@ -1,9 +1,10 @@
 import { openDatabase,deleteDatabase }from 'react-native-sqlite-storage';
 import { Actions } from 'react-native-router-flux';
 import moment from "moment";
+import pushSender from './pushSender';
 
 const db = openDatabase({name : 'memorize.db'});
-
+let Notification = new pushSender()
 export default class Word {
 
     addWord(enMean, trMean, structor, sentence){
@@ -33,11 +34,12 @@ export default class Word {
         })
     }
 
-    updateTeachWord(id, teach){
+    updateTeachWord(id, teach, enMean){
         db.transaction((tx) => {
             tx.executeSql("UPDATE vocabulary SET teach=?, teachLevel=1, teachDate=?, reminderDate=? WHERE id=?",
             [teach, moment(new Date()).format('YYYY-MM-DD'), moment(new Date()).add(1, 'days').format('YYYY-MM-DD'), id], (tx,res) => {
-                console.log(res)
+                if(teach == 1)
+                    Notification.SendNotification(enMean,  moment(new Date()).add(1, 'days').format('YYYY-MM-DD') );
             },(err) => console.log(err));
         })
     }

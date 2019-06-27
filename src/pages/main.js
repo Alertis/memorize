@@ -10,6 +10,7 @@ let service = new Data()
 
 const db = openDatabase({name : 'memorize.db'});
 
+
 export default class Main extends Component {
     constructor(props){
         super(props);
